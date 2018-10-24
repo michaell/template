@@ -32,6 +32,9 @@ const wait         = require('gulp-wait');
 const del          = require('del');
 const browserSync  = require('browser-sync').create();
 
+// adaptive
+const cssunit = require('gulp-css-unit');
+
 /*--------------------------paths--------------------------*/
 const paths = {
 	root: './dist',
@@ -60,6 +63,10 @@ const paths = {
 	fonts: {
 		src: 'app/fonts/**/*.*',
 		dest: 'dist/assets/fonts/'
+   },
+	docs: {
+		src: 'app/docs/**/*.*',
+		dest: 'dist/assets/docs/'
    }
 };
 
@@ -119,7 +126,8 @@ function scripts(){
 		.pipe(concat('main.min.js'))
 		.pipe(uglify())
 		.pipe(gulpIf(isDevelopment, sourcemaps.write())) //write sourcemaps in dev mode
-		.pipe(gulp.dest(paths.scripts.dest));
+		.pipe(gulp.dest(paths.scripts.dest))
+		.pipe(browserSync.stream());
 };
 
 
@@ -155,6 +163,10 @@ function styles() {
 		}))
 		.pipe(gulpIf(isDevelopment, sourcemaps.init()))
 		.pipe(sass())
+		.pipe(cssunit({
+			type     :    'px-to-rem',
+			rootSize :    16
+	  	}))
 		.pipe(autoprefixer('last 4 versions'))        
 		.pipe(rename({suffix: '.min'}))
 		.pipe(minifycss())
@@ -214,6 +226,12 @@ function fonts() {
 		.pipe(gulp.dest(paths.fonts.dest));
 }
 
+/*------------------------docs transfer------------------------*/
+function docs() {
+	return gulp.src(paths.docs.src)
+		.pipe(gulp.dest(paths.docs.dest));
+}
+
 /*------------------------watcher------------------------*/
 function watch() {
 	gulp.watch(paths.scripts.src, scripts);
@@ -224,6 +242,7 @@ function watch() {
 	gulp.watch(paths.sprites.src, toSvg);
 	gulp.watch(paths.images.src, images);
 	gulp.watch(paths.fonts.src, fonts);
+	gulp.watch(paths.docs.src, docs);
 }
 
 /*------------------------server------------------------*/
@@ -250,26 +269,24 @@ exports.server = server;
 exports.vendorCSS = vendorCSS;
 exports.vendorJS = vendorJS;
 exports.toSvg = toSvg;
+exports.docs = docs;
 
 
 
 /*------------------------build and watch------------------------*/
 // gulp.task('default', gulp.series(
 //     clean,
-//     gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, toSvg),
+//     gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, docs, toSvg),
 //     gulp.parallel(watch, server)
 // ));
 
 
 gulp.task('default', gulp.series(
-	gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, toSvg),
+	gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, docs, toSvg),
 	gulp.parallel(watch, server)
 ));
 
 gulp.task('build', gulp.series(
 	clean,
-	gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, toSvg)
+	gulp.parallel(styles, vendorCSS, scripts, vendorJS, templates, images, fonts, docs, toSvg)
 ));
-
-
-
