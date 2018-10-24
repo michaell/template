@@ -77,8 +77,8 @@ const isDevelopment = true;
 
 /*------------paths to JS files------------*/
 let moduleJs = [
-	'app/scripts/common/blur.js',
-	'app/scripts/common/test.js'
+	'app/scripts/common/test1.js',
+	'app/scripts/common/test2.js'
 ];
 
 /*****************************------------JS and CSS libraries------------*****************************/
