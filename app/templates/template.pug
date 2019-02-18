@@ -18,10 +18,8 @@ html
 	body
 		.wrapper
 			include common/header.pug
-			main.page-content
-				.container
-					block content
-		include common/footer.pug
+			block content
+			include common/footer.pug
 
 		script(src='assets/scripts/vendor.min.js')
 		script(src='assets/scripts/main.min.js')   

@@ -1,15 +1,6 @@
-
-/*-----------------------------layout----------------------------*/
-$container-width: 1180px;
-$footer-height: 140px;
-
 /*-----------------------------colors----------------------------*/
-$blue: rgb(0, 191, 165);
-$lightBlue: #20b5a1;
-$gray: #455a64;
-$black: #373e42;
-$yellowish: #f0efe9;
-
+// $main-color: rgb(221, 81, 26);
+// $accent-color: rgb(221, 81, 26);
 
 
 /*-----------------------------fonts----------------------------*/
@@ -21,7 +12,12 @@ $Proxima: 'Proxima', serif;
 $Playfair: 'Playfair Display', serif;
 
 /*-----------------------------screen resolutions----------------------------*/
+$phone-portrait: 320px;
+$phone-landscape: 480px;
 
-$laptops: 1800px;
-$tablets: 1200px;
-$phones: 768px;
+$tablet-small: 600px;
+$tablet-portrait: 768px;
+$tablet-landscape: 980px;
+
+$desctop: 1200px;
+$desctop-big: 1201px;

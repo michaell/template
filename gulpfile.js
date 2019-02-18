@@ -58,7 +58,7 @@ const paths = {
    },
 	sprites: {
 		src: 'app/sprites/**/*.svg',
-		dest: 'app/images/'
+		dest: 'dist/assets/sprites/'
    },
 	fonts: {
 		src: 'app/fonts/**/*.*',

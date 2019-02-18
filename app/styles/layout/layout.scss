@@ -1,15 +1,38 @@
-* {
+*, *::after, *::before  {
 	box-sizing: border-box;
 }
 
-body, html {
+html, body {
 	width: 100%;
 	height: 100%;
+}
+
+html {
 	background-color: white;
+
+	@include desctop {
+		font-size: 16px;
+	}
+	@include tablet-landscape {
+		font-size: 15px;
+	}
+	@include tablet-portrait {
+		font-size: 15px;
+	}
+	@include tablet-small {
+		font-size: 14px;
+	}
+	@include phone-landscape {
+		font-size: 13px;
+	}
+	@include phone-portrait {
+		font-size: 13px;
+	}
 }
 
 body {
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	font-family: $default-font;
 	font-size: 16px;
@@ -17,20 +40,69 @@ body {
 	-webkit-font-smoothing: antialiased; 
 }
 
+/*-----------------настройки контейнера------------------*/
+// Жёсткий контейнер
+
+// .container {
+// 	margin: 0 auto;
+// 	display: flex;
+	
+// 	@include desctop-big {
+// 		width: 1170px;
+// 	}
+// 	@include desctop {
+// 		width: 970px;
+// 	}
+// 	@include tablet-landscape {
+// 		width: 750px;
+// 	}
+// 	@include tablet-portrait {
+// 		width: 600px;
+// 	}
+// 	@include tablet-small {
+// 		width: 450px;
+// 	}
+// 	@include phone-landscape {
+// 		width: 90%;
+// 	}
+// 	@include phone-portrait {
+// 		width: 95%;
+// 	}
+// }
+
+// Резиновый контейнер
 .container {
-	width: $container-width;
 	margin: 0 auto;
-	// @include tablets {
-	//     width: 720px;
-	// }
-	// @include phones {
-	//     width: 95%;               
-	// }
+	display: flex;
+	
+	@include desctop-big {
+		width: 1170px;
+	}
+	@include desctop {
+		width: 85%;
+	}
+	@include phone-landscape {
+		width: 90%;
+	}
+	@include phone-portrait {
+		width: 95%;
+	}
 }
 
 .wrapper {
+	min-height: 100vh;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.page-content {
 	flex: 1 0 auto;
+}
+
+.page-content__wrapper {
+	display: flex;
+	flex-flow: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,6 +135,8 @@ p {
 }
 
 img {
-   vertical-align: middle;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto;
 }
 
