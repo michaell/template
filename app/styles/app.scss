@@ -2,6 +2,9 @@
 @import "helpers/mixins";
 @import "helpers/variables";
 
+/*-----------------------------responsive----------------------------*/
+@import "responsive/responsive.scss";
+
 /*-----------------------------elements----------------------------*/
 @import 'elements/buttons';
 @import 'elements/forms';
